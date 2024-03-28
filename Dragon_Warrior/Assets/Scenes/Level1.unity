@@ -1893,9 +1893,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 911be84ce8b500949802acde0f3e4c2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraOB: {fileID: 1672836164}
+  Fireball: {fileID: 3593838060781130469, guid: d1fbae1888fb8c642b0ac8c04c20ffe3, type: 3}
+  FirePoint: {fileID: 2120429481}
   jumpPower: 12
   speed: 5
-  walking: 0
+  attackCooldown: 1
+  canAttack: 0
 --- !u!114 &1006242733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3543,6 +3547,7 @@ GameObject:
   - component: {fileID: 1672836166}
   - component: {fileID: 1672836165}
   - component: {fileID: 1672836168}
+  - component: {fileID: 1672836169}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3668,6 +3673,21 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
+--- !u!114 &1672836169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1672836164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cea45852eb3b99741a4aa9f26f0a2d5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1006242729}
+  aheadDistance: 1
+  cameraSpeed: 1
 --- !u!1 &1704190734
 GameObject:
   m_ObjectHideFlags: 0
@@ -4533,7 +4553,7 @@ Transform:
   m_GameObject: {fileID: 2120429480}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.77, y: -0.52, z: 0}
+  m_LocalPosition: {x: 0.983, y: -0.653, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
