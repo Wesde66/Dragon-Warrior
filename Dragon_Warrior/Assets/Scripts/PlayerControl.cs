@@ -11,31 +11,54 @@ public class PlayerControl : MonoBehaviour
 {
 
     Rigidbody2D rigidbody2d;
+    Animator animator;
+    ParticleSystem PlayerSmoke;
+    
+    
+    
+
+    [Header("Camera")]
     CameraMovement cameraMovement;
     [SerializeField] GameObject cameraOB;
 
+    [Header("UI")]
+    UIcanvasController UI;
+    [SerializeField] GameObject UIGameObject;
+
+    [Header("Projectiles")]
     public GameObject Fireball;
     public Transform FirePoint;
-    
-    Animator animator;
+
+    [Header("Player Atributes")]
     [SerializeField] float jumpPower;
     [SerializeField] float speed;
     [SerializeField] float attackCooldown;
-    [SerializeField]bool canAttack;
-
+    
+    
+    bool canAttack;
     private float attackTimer;
-
     bool isGrounded = true;
     bool isFliped = false;
-
     Vector2 move;
     float walking;
 
+
+    [SerializeField] float maxHealth;
+    public float currentHealth { get; private set; }
+
+
+
     private void Start()
     {
+        //Get components
         rigidbody2d = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         cameraMovement = cameraOB.GetComponent<CameraMovement>();
+        UI = UIGameObject.GetComponent<UIcanvasController>();
+        
+
+        //Player atributes
+        currentHealth = maxHealth;
         
     }
 
@@ -55,10 +78,13 @@ public class PlayerControl : MonoBehaviour
         {
             animator.SetBool("WalkingAnim", true);
             
+
+
         }
         else
         {
             animator.SetBool("WalkingAnim", false);
+            
         }
 
         FlipPlayer();
@@ -71,6 +97,8 @@ public class PlayerControl : MonoBehaviour
         {
             canAttack = false;
         }
+
+       
 
     }
 
@@ -139,6 +167,20 @@ public class PlayerControl : MonoBehaviour
             
             transform.Rotate(0,180,0, Space.World);
             isFliped = false ;
+        }
+    }
+
+    public void TakeDamage (float _damage)
+    {
+        currentHealth = Mathf.Clamp(currentHealth - _damage, 0, maxHealth);
+
+        if (currentHealth > 0)
+        {
+            animator.SetTrigger("Hurt");
+        }
+        else
+        {
+            animator.SetTrigger("Die");
         }
     }
 
