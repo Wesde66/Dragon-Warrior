@@ -184,6 +184,11 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
+    public void GiveHealth(float _health)
+    {
+        currentHealth = Mathf.Clamp(currentHealth + _health, 0, maxHealth);
+    }
+
     
 
 
